@@ -15,7 +15,7 @@ jobs:
       postgres:
         image: postgis/postgis
         env:
-          POSTGRES_DB: transporter_testing
+          POSTGRES_DB: testing
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: root
         options: >-
@@ -58,7 +58,7 @@ jobs:
         echo "DB_CONNECTION=pgsql" 
         echo "DB_HOST=127.0.0.1" 
         echo "DB_PORT=5432" 
-        echo "DB_DATABASE=transporter_testing" 
+        echo "DB_DATABASE=testing" 
         echo "DB_USERNAME=postgres" 
         echo "DB_PASSWORD=password" 
     # - name: Run Database Migrations
