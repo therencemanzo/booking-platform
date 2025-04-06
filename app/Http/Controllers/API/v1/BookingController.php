@@ -10,6 +10,7 @@ use App\Models\Booking;
 use App\Services\BookingService;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 class BookingController extends Controller
 {
     
@@ -18,11 +19,7 @@ class BookingController extends Controller
     public function getBookings(Request $request)
     {
         // Fetch bookings for the authenticated user
-        $bookings = $request->user()
-        ->bookings()
-        ->with(['parkingSpace'])
-        ->latest()
-        ->paginate();
+        $bookings = $this->bookingService->getUserBookings($request->user());
 
         return BookingResource::collection($bookings);
     }

@@ -16,16 +16,18 @@ class DateRangeFilter
     {
         if($this->dateFrom != null && $this->dateTo != null){
 
-            $query->whereDoesntHave('bookings', function($q){
-                $q->where('date_from', '>=',$this->dateFrom)
-                    ->orWhere('date_to', '<=',$this->dateTo);
+            $query->whereDoesntHave('bookings', function($query){
+                $query->where(function ($q)  {
+                    $q->where('date_from', '<=', $this->dateTo)
+                      ->where('date_to', '>=', $this->dateFrom);
+                });
             });
             
         }
         else{
 
-            $query->whereDoesntHave('bookings', function($q){
-                $q->where('date_from', '<=', now())
+            $query->whereDoesntHave('bookings', function($query){
+                $query->where('date_from', '<=', now())
                     ->where('date_to', '>=', now());
             });
         }   

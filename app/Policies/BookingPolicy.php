@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Booking;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\JsonResponse;
 
@@ -51,10 +52,17 @@ class BookingPolicy
             return Response::deny('Booking was already cancelled.');
         }
 
-        if ($booking->created_at < now()->subMinutes(60)) {
+        // Get the current time and the booking creation time
+        $currentTime = Carbon::now();
+        $createdAt = Carbon::parse($booking->created_at);
 
-            return Response::deny('Cannot update Booking update/cancel grace period is finished and booking was already started.');
+        if ($createdAt->diffInMinutes($currentTime) > 60) {
+            // If the booking's date_from is today or in the past, disallow update
+            if (Carbon::parse($booking->date_from)->isToday() || Carbon::parse($booking->date_from)->isPast()) {
+                return Response::deny('Cannot update Booking update/cancel grace period is finished and booking was already started.');
+            }
         }
+        
         return Response::allow();
     }
 

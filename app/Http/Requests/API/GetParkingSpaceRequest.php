@@ -22,7 +22,7 @@ class GetParkingSpaceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date_from' => 'required_with:date_to|date|before_or_equal:date_to',
+            'date_from' => 'required_with:date_to|date|after_or_equal:today',
             'date_to' => 'required_with:date_from|date|after_or_equal:date_from',
         ];
     }

@@ -20,13 +20,15 @@ class BookingResource extends JsonResource
             'id'=> $this->id,
             'reference_id'=> $this->reference,
             'parking_space'=> [
+                'id' => $this->id,
                 'name'=> $this->parkingSpace->name
             ],
             'status'=> $this->status,
-            'date_from'=> Carbon::parse($this->date_from)->format('d/m/Y'),
-            'date_to'=> Carbon::parse($this->date_to)->format('d/m/Y'),
+            'date_from'=> Carbon::parse($this->date_from)->format('Y-m-d'),
+            'date_to'=> Carbon::parse($this->date_to)->format('Y-m-d'),
             'total_price'=> Number::currency($this->total_price, 'GBP'),
             'details'=> json_decode($this->details),
+            'can_update' => $this->can_update,
         ];
     }
 }

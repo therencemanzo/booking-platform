@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Jobs\SendAdminNotification;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Booking;
 use App\Models\ParkingSpace;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Exception;
 class BookingService
@@ -17,6 +19,23 @@ class BookingService
         //
     }
 
+    public function getUserBookings(User $user){
+
+        return $user
+        ->bookings()
+        ->select('*')
+        ->selectRaw(
+            'CASE
+                WHEN EXTRACT(EPOCH FROM (NOW() - created_at)) / 60 > 60 
+                     AND (date(date_from) <= CURRENT_DATE) THEN 0
+                ELSE 1
+            END AS can_update'
+        )
+        ->with(['parkingSpace'])
+        ->orderBy('id','desc')
+        ->paginate();
+
+    }
     public function book($user, $data)
     {
 
@@ -43,6 +62,8 @@ class BookingService
                     ]);
                 });
 
+                SendAdminNotification::dispatch($booking);
+                
                 return $booking;
             } catch (Exception $e) {
                 // Handle any exception (e.g., log it or return an error message)
@@ -85,6 +106,7 @@ class BookingService
 
                     return $booking->refresh();
                 });
+
 
                 return $booking;
 
