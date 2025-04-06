@@ -257,6 +257,78 @@ endpoints:
     custom: []
   -
     httpMethods:
+      - GET
+    uri: 'api/v1/parking-space-price-details/{parkingSpace_id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      parkingSpace_id:
+        name: parkingSpace_id
+        description: 'The ID of the parkingSpace.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      parkingSpace_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      date_from:
+        name: date_from
+        description: 'This field is required when <code>date_to</code> is present.  Must be a valid date. Must be a date after or equal to <code>today</code>.'
+        required: false
+        example: '2051-04-30'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      date_to:
+        name: date_to
+        description: 'This field is required when <code>date_from</code> is present.  Must be a valid date. Must be a date after or equal to <code>date_from</code>.'
+        required: false
+        example: '2051-04-30'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      date_from: '2051-04-30'
+      date_to: '2051-04-30'
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - POST
     uri: api/v1/parking-spaces/book
     metadata:
