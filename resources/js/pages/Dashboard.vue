@@ -2,7 +2,6 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/vue3';
-import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { onBeforeMount, onMounted, ref } from 'vue';
@@ -34,7 +33,7 @@ onBeforeMount(() => {
     if(props.bookings.data.length > 0){
 
         props.bookings.data.forEach(element => {
-            let event = {
+            const event = {
                 title : element.reference_id + ' ' + element.parking_space.name,
                 start: new Date(element.date_from),
                 end: new Date(element.date_to),
@@ -56,7 +55,7 @@ onMounted(()=>{
     Echo.private(`App.Models.User.` + page.props.auth.user.id)
     .notification((notification) => {
         if(notification.type == 'new.booking'){
-            let event = {
+            const event = {
                 title : notification.booking.reference_id + ' '+ notification.booking.parking_space.name,
                 start: new Date(notification.booking.date_from),
                 end: new Date(notification.booking.date_to),
@@ -81,7 +80,6 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/dashboard',
     },
 ];
-const today = new Date();
 
 </script>
 
