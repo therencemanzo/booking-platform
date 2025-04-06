@@ -17,8 +17,8 @@ class DateRangeFilter
         if($this->dateFrom != null && $this->dateTo != null){
 
             $query->whereDoesntHave('bookings', function($q){
-                $q->where('date_from', $this->dateFrom)
-                    ->where('date_to', $this->dateTo);
+                $q->where('date_from', '>=',$this->dateFrom)
+                    ->orWhere('date_to', '<=',$this->dateTo);
             });
             
         }

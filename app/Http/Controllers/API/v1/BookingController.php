@@ -21,9 +21,15 @@ class BookingController extends Controller
         $bookings = $request->user()
         ->bookings()
         ->with(['parkingSpace'])
+        ->latest()
         ->paginate();
 
         return BookingResource::collection($bookings);
+    }
+
+    public function getBookingDetails(Request $request, Booking $booking){
+
+        return BookingResource::make($booking);
     }
     public function bookParkingSpace(BookParkingSpaceRequest $request)
     {

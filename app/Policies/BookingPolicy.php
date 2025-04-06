@@ -20,9 +20,14 @@ class BookingPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Booking $booking): bool
-    {
-        return false;
+    public function view(User $user, Booking $booking)
+    {   
+
+        if ($user->id !== $booking->customer_id) {
+            return Response::deny('You do not own this booking.');
+        }
+
+        return Response::allow();
     }
 
     /**

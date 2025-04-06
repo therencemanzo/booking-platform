@@ -32,37 +32,37 @@ class PriceFactory extends Factory
     public function withDailyPrices()
     {
         return $this->afterCreating(function (Price $price) {
-            DailyPrice::factory()->count(3)->create([
+            DailyPrice::factory()->create([
                 'price_id' => $price->id,
                 'day' => 'monday',
                 'price' => 8.00,
             ]);
-            DailyPrice::factory()->count(3)->create([
+            DailyPrice::factory()->create([
                 'price_id' => $price->id,
                 'day' => 'tuesday',
                 'price' => 8.00,
             ]);
-            DailyPrice::factory()->count(3)->create([
+            DailyPrice::factory()->create([
                 'price_id' => $price->id,
                 'day' => 'wednesday',
                 'price' => 8.00,
             ]);
-            DailyPrice::factory()->count(3)->create([
+            DailyPrice::factory()->create([
                 'price_id' => $price->id,
                 'day' => 'thursday',
                 'price' => 8.00,
             ]);
-            DailyPrice::factory()->count(3)->create([
+            DailyPrice::factory()->create([
                 'price_id' => $price->id,
                 'day' => 'friday',
                 'price' => 8.00,
             ]);
-            DailyPrice::factory()->count(3)->create([
+            DailyPrice::factory()->create([
                 'price_id' => $price->id,
                 'day' => 'saturday',
                 'price' => 10.00,
             ]);
-            DailyPrice::factory()->count(3)->create([
+            DailyPrice::factory()->create([
                 'price_id' => $price->id,
                 'day' => 'sunday',
                 'price' => 10.00,

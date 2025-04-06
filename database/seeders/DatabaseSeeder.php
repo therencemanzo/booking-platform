@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create(['role' => 'customer']);
+        //User::factory(10)->create(['role' => 'customer']);
 
         $summePrice = Price::factory()->withDailyPrices()->create([
             'title' => 'Summer Season Prices',
@@ -38,8 +38,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
+            'name' => 'Customer User',
+            'email' => 'customer@example.com',
+            'role' => 'admin',
+        ]);
+
+        User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'role' => 'admin',
         ]);
 
         //Loop to create 10 parking spaces with correct count
