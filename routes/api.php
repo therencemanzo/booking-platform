@@ -22,6 +22,7 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/parking-spaces', [ParkingSpacesController::class, 'getParkingSpaces'])->name('api.get.parking.spaces');
         Route::get('/parking-space/{parkingSpace}', [ParkingSpacesController::class, 'getParkingSpaceDetails'])->name('api.get.parking.space.details');
+        Route::get('/parking-space-price-details/{parkingSpace}', [ParkingSpacesController::class, 'getParkingSpacePriceDetails'])->name('api.get.parking.space.price.details');
         Route::post('/parking-spaces/book', [BookingController::class, 'bookParkingSpace'])->name('api.book.parking.space');
         Route::get('/bookings', [BookingController::class, 'getBookings'])->name('api.get.bookings');
         

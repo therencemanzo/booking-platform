@@ -20,7 +20,7 @@ class BookingResource extends JsonResource
             'id'=> $this->id,
             'reference_id'=> $this->reference,
             'parking_space'=> [
-                'id' => $this->id,
+                'id' => $this->parkingSpace->id,
                 'name'=> $this->parkingSpace->name
             ],
             'status'=> $this->status,

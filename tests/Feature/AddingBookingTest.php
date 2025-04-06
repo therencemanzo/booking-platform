@@ -3,13 +3,14 @@
 use App\Models\ParkingSpace;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
- 
+use Illuminate\Support\Facades\Queue;
+
 uses(RefreshDatabase::class);
 
 test('prevent overlaping date range bookings in one parking space', function () {
 
     $this->seed();
-
+    Queue::fake();
     $this->actingAs(User::first());
 
     $data = [
@@ -31,7 +32,7 @@ test('prevent overlaping date range bookings in one parking space', function () 
 test('date should be greater or equal than today validation booking', function () {
 
     $this->seed();
-
+    Queue::fake();
     $this->actingAs(User::first());
 
     $data = [

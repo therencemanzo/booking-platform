@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\SendAdminNotification;
 use App\Models\Booking;
 use App\Models\ParkingSpace;
 use App\Models\User;
@@ -7,10 +8,14 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Queue;
 
 uses(RefreshDatabase::class);
 
 it('prevents race condition by using a lock during concurrent bookings', function () {
+
+    Queue::fake();
 
     $this->seed();
 
@@ -21,7 +26,7 @@ it('prevents race condition by using a lock during concurrent bookings', functio
 
     // Define the booking data (same for all users)
     $dateFrom = now()->addDay()->format('Y-m-d H:i:s');
-    $dateTo = now()->addDay(2)->format('Y-m-d H:i:s');
+    $dateTo = now()->addDays(2)->format('Y-m-d H:i:s');
     $bookingData = [
         'parking_space_id' => $parkingSpace->id,
         'date_from' => $dateFrom,

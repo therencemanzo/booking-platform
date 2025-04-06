@@ -5,12 +5,14 @@ use App\Models\ParkingSpace;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use function Pest\Laravel\travel;
+use Illuminate\Support\Facades\Queue;
+
 uses(RefreshDatabase::class);
 
 it('prevent updating when date range is already taken', function () {
 
     $this->seed();
-
+    Queue::fake();
     $this->actingAs(User::first());
 
     $data = [

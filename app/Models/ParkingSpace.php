@@ -112,5 +112,6 @@ class ParkingSpace extends Model
             'details' => $details,
         ];
     }
+
     
 }
