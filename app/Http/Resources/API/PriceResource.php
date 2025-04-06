@@ -17,6 +17,7 @@ class PriceResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'current' => $this->is_current,
             'title' => $this->title,
             'from' => $this->valid_from ? Carbon::parse($this->valid_from)->format('d/m/Y') : null,
             'until' => $this->valid_until ? Carbon::parse($this->valid_until)->format('d/m/Y') : null,

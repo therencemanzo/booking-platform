@@ -14,7 +14,7 @@ Route::prefix('v1')->group(function () {
     //auth routes
     Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
-    Route::get('/get-prices', [PriceController::class, 'getPrices'])->name('api.get.prices');
+    Route::get('/get-prices', [PriceController::class, 'getPricesBySeason'])->name('api.get.prices.by.season');
 
     Route::middleware('auth:sanctum')->group(function () {
 

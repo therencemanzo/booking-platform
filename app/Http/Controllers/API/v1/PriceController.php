@@ -10,9 +10,13 @@ use Illuminate\Http\Request;
 class PriceController extends Controller
 {
     
-    public function getPrices(Request $request){
+    public function getPricesBySeason(Request $request){
 
-        $price = Price::with(['dailyPrices'])->get();
+        $price = Price::select('*')
+        ->selectRaw( '(valid_from <= NOW() AND valid_until >= NOW()) AS is_current')
+        ->with(['dailyPrices'])
+        ->orderByDesc('is_default') 
+        ->get();
 
         return PriceResource::collection($price);
     }
